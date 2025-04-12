@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: ocs_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ocs_subscribers_db
+    ports:
+      - "3307:3306"  # Mapea el puerto 3307 del host al 3306 del contenedor
+    volumes:
+      - ./init_db:/docker-entrypoint-initdb.d  # Carpeta con init.sql
+      - db-data:/var/lib/mysql
+
+  ocs_backend:
+    image: miguelac1112/ocs_project-ocs_backend
+    container_name: ocs_backend
+    ports:
+      - "3868:3868"
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: ocs_subscribers_db
+    depends_on:
+      - db
+
+  ocs_api:
+    image: miguelac1112/ocs_project-ocs_api
+    container_name: ocs_api
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: ocs_subscribers_db
+    depends_on:
+      - db
+
+volumes:
+  db-data:
