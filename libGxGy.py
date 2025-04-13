@@ -16,11 +16,12 @@ DPR_DO_NOT_WANT_TO_TALK_TO_YOU = 2
 
 DIAMETER_GY_APPLICATION_ID = 4
 
-GY_ORIGIN_REALM       = "epc.mnc000.mcc716.3gppnetwork.org"
-GY_DESTINATION_HOST   = "ocs.mnc000.mcc716.3gppnetwork.org"
-GY_DESTINATION_REALM  = "epc.mnc000.mcc716.3gppnetwork.org"
+GY_ORIGIN_REALM       = "epc.mnc00.mcc716.3gppnetwork.org"
+GY_DESTINATION_HOST   = "ocs.mnc00.mcc716.3gppnetwork.org"
+GY_DESTINATION_REALM  = "epc.mnc00.mcc716.3gppnetwork.org"
 GY_SERVICE_CONTEXT_ID = "vendor@3gpp.org"
 GY_USER_NAME          = "test.com.pe"
+MCC_MNC = "71600"
 
 #------------------------------------------------------
 #-- CER: Capabilities-Exchange-Request definition    --
@@ -108,10 +109,10 @@ def PGyI(session_id,o_host,state,msisdn,imsi,apn):
     # AVP: Origin-Host(264)
     # AVP: Origin-Realm(296)
     # AVP: Destination-Realm(283)
-    # AVP: Service-Context-Id(461)              -> always huawei3225@3gpp.org
+    # AVP: Service-Context-Id(461)              -
     # AVP: CC-Request-Type(416)                 -> always 1: INITIAL_REQUEST
     # AVP: CC-Request-Number(415)               -> always 0
-    # AVP: User-Name(1)                         -> always claro
+    # AVP: User-Name(1)                         
     # AVP: Orgin-State-Id(278)
     # AVP: Event-Timestamp(55)
     # AVP: Subscriton-Id(443)                   -> Type 0: MSISDN
@@ -157,19 +158,19 @@ def PGyI(session_id,o_host,state,msisdn,imsi,apn):
     CCR_avps.append(encodeAVP("3GPP-PDP-Type",0))    
     #-- CCR_avps.append(encodeAVP("3GPP-GPRS-Negotiated-QoS-profile","UTMS"))
     CCR_avps.append("0000000580000023000028af30382d343430393030303030343139303030303134376200")
-    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC",MCC_MNC))
     CCR_avps.append(encodeAVP("3GPP-NSAPI","5"))
     CCR_avps.append(encodeAVP("Called-Station-Id",apn))
     CCR_avps.append(encodeAVP("3GPP-Selection-Mode","0"))
     CCR_avps.append(encodeAVP("3GPP-Charging-Characteristics","0100"))
-    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC",MCC_MNC))
     #-- 3GPP-Timezone
     CCR_avps.append("000000178000000e000028af0a000000")
     #-- 3GPP-User-Location-Info
     CCR_avps.append("0000001680000019000028af8217f60135df17f601055931d7000000")
     #--                  00000016C0000017000028AF3731363130353633353136
     #--              0000001680000019000028af8217f60135df17f601055931d7000000
-    #-- CCR_avps.append(encodeAVP("3GPP-User-Location-Info","71610563516"))
+    #-- CCR_avps.append(encodeAVP("3GPP-User-Location-Info","71601563516"))
     CCR_avps.append(encodeAVP("3GPP-RAT-Type","1004"))
     CCR_avps.append(encodeAVP("Framed-IP-Address","10.56.38.128"))
     CCR_avps.append(encodeAVP("3GPP-CG-Address","10.128.65.81"))
@@ -197,11 +198,11 @@ def PGyU(session_id,o_host,state,msisdn,imsi,apn,ratinggroup,requestnumber,usedq
     # AVP: Origin-Host(264)
     # AVP: Origin-Realm(296)
     # AVP: Destination-Realm(283)
-    # AVP: Service-Context-Id(461)              -> always huawei3225@3gpp.org
+    # AVP: Service-Context-Id(461)              
     # AVP: CC-Request-Type(416)                 -> always 2: UPDATE_REQUEST
     # AVP: CC-Request-Number(415)
     # AVP: Destination-Host
-    # AVP: User-Name(1)                         -> always claro
+    # AVP: User-Name(1)                        
     # AVP: Orgin-State-Id(278)
     # AVP: Event-Timestamp(55)
     # AVP: Subscriton-Id(443)                   -> Type 0: MSISDN
@@ -254,19 +255,19 @@ def PGyU(session_id,o_host,state,msisdn,imsi,apn,ratinggroup,requestnumber,usedq
     CCR_avps.append(encodeAVP("3GPP-PDP-Type",0))    
     #-- CCR_avps.append(encodeAVP("3GPP-GPRS-Negotiated-QoS-profile","UTMS"))
     CCR_avps.append("0000000580000023000028af30382d343430393030303030343139303030303134376200")
-    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC",MCC_MNC))
     CCR_avps.append(encodeAVP("3GPP-NSAPI","5"))
     CCR_avps.append(encodeAVP("Called-Station-Id",apn))
     CCR_avps.append(encodeAVP("3GPP-Selection-Mode","0"))
     CCR_avps.append(encodeAVP("3GPP-Charging-Characteristics","0100"))
-    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC",MCC_MNC))
     #-- 3GPP-Timezone
     CCR_avps.append("000000178000000e000028af0a000000")
     #-- 3GPP-User-Location-Info
     CCR_avps.append("0000001680000019000028af8217f60135df17f601055931d7000000")
     #--                  00000016C0000017000028AF3731363130353633353136
     #--              0000001680000019000028af8217f60135df17f601055931d7000000
-    #-- CCR_avps.append(encodeAVP("3GPP-User-Location-Info","71610563516"))
+    #-- CCR_avps.append(encodeAVP("3GPP-User-Location-Info","71600563516"))
     CCR_avps.append(encodeAVP("3GPP-RAT-Type","1004"))
     CCR_avps.append(encodeAVP("Framed-IP-Address","10.56.38.128"))
     CCR_avps.append(encodeAVP("3GPP-CG-Address","10.128.65.81"))
@@ -294,11 +295,11 @@ def PGyT(session_id,o_host,state,msisdn,imsi,apn,ratinggroup,requestnumber,usedq
     # AVP: Origin-Host(264)
     # AVP: Origin-Realm(296)
     # AVP: Destination-Realm(283)
-    # AVP: Service-Context-Id(461)              -> always huawei3225@3gpp.org
+    # AVP: Service-Context-Id(461)              
     # AVP: CC-Request-Type(416)                 -> always 3: TERMINATION_REQUEST
     # AVP: CC-Request-Number(415)
     # AVP: Destination-Host
-    # AVP: User-Name(1)                         -> always claro
+    # AVP: User-Name(1)                         
     # AVP: Orgin-State-Id(278)
     # AVP: Event-Timestamp(55)
     # AVP: Subscriton-Id(443)                   -> Type 0: MSISDN
@@ -349,12 +350,12 @@ def PGyT(session_id,o_host,state,msisdn,imsi,apn,ratinggroup,requestnumber,usedq
     CCR_avps.append(encodeAVP("3GPP-PDP-Type",0))    
     #-- CCR_avps.append(encodeAVP("3GPP-GPRS-Negotiated-QoS-profile","UTMS"))
     CCR_avps.append("0000000580000023000028af30382d343430393030303030343139303030303134376200")
-    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC",MCC_MNC))
     CCR_avps.append(encodeAVP("3GPP-NSAPI","5"))
     CCR_avps.append(encodeAVP("Called-Station-Id",apn))
     CCR_avps.append(encodeAVP("3GPP-Selection-Mode","0"))
     CCR_avps.append(encodeAVP("3GPP-Charging-Characteristics","0100"))
-    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC",MCC_MNC))
     #-- 3GPP-Timezone
     CCR_avps.append("000000178000000e000028af0a000000")
     #-- 3GPP-User-Location-Info

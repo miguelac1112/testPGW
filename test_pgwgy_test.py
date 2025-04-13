@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import datetime
 import time
 import sys
 import codecs
@@ -12,7 +11,6 @@ from libDiameter import *
 from libGxGy import *
 
 def MGyI2(session_id,o_host,state,msisdn,imsi,apn,ratinggroup):
-    
     CCR_avps=[]
     CCR_avps.append(encodeAVP("Session-Id", session_id))
     CCR_avps.append(encodeAVP("Auth-Application-Id",DIAMETER_GY_APPLICATION_ID))
@@ -33,12 +31,12 @@ def MGyI2(session_id,o_host,state,msisdn,imsi,apn,ratinggroup):
     CCR_avps.append(encodeAVP("3GPP-Charging-Id",0))
     CCR_avps.append(encodeAVP("3GPP-PDP-Type",0))
     CCR_avps.append(encodeAVP("3GPP-GPRS-Negotiated-QoS-profile","08-44090000465000004650"))
-    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC","71600"))
     CCR_avps.append(encodeAVP("3GPP-NSAPI","5"))
     CCR_avps.append(encodeAVP("Called-Station-Id",apn))
     CCR_avps.append(encodeAVP("3GPP-Selection-Mode","0"))
     CCR_avps.append(encodeAVP("3GPP-Charging-Characteristics","0100"))
-    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC","71600"))
     CCR_avps.append("000000178000000e000028af0a000000")
     CCR_avps.append("0000001680000019000028af8217f601378d17f6010848b8fc000000")
     CCR_avps.append(encodeAVP("3GPP-RAT-Type","06"))
@@ -91,12 +89,12 @@ def MGyU2(session_id,o_host,state,msisdn,imsi,apn,ratinggroup,usedquota,requestn
     CCR_avps.append(encodeAVP("3GPP-Charging-Id",0))
     CCR_avps.append(encodeAVP("3GPP-PDP-Type",0))
     CCR_avps.append(encodeAVP("3GPP-GPRS-Negotiated-QoS-profile","08-44090000465000004650"))
-    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC","71600"))
+    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC",MCC_MNC))
     CCR_avps.append(encodeAVP("3GPP-NSAPI","5"))
     CCR_avps.append(encodeAVP("Called-Station-Id",apn))
     CCR_avps.append(encodeAVP("3GPP-Selection-Mode","0"))
     CCR_avps.append(encodeAVP("3GPP-Charging-Characteristics","0100"))
-    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC","71600"))
+    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC",MCC_MNC))
     CCR_avps.append("000000178000000e000028af0a000000")
     CCR_avps.append("0000001680000019000028af8217f601378d17f6010848b8fc000000")
     CCR_avps.append(encodeAVP("3GPP-RAT-Type","06"))
@@ -115,9 +113,6 @@ def MGyU2(session_id,o_host,state,msisdn,imsi,apn,ratinggroup,usedquota,requestn
     return msg
 
 def MGyT2(session_id,o_host,state,msisdn,imsi,apn,usedquota):
-    # From the trace taken on 2021/05/10, the AVPs structure of the CCR-I to send in
-    # Telcel PERU network is:
-    # 
     CCR_avps=[]
     CCR_avps.append(encodeAVP("Session-Id", session_id))
     CCR_avps.append(encodeAVP("Auth-Application-Id",DIAMETER_GY_APPLICATION_ID))
@@ -144,12 +139,12 @@ def MGyT2(session_id,o_host,state,msisdn,imsi,apn,usedquota):
     CCR_avps.append(encodeAVP("3GPP-Charging-Id",0))
     CCR_avps.append(encodeAVP("3GPP-PDP-Type",0))
     CCR_avps.append(encodeAVP("3GPP-GPRS-Negotiated-QoS-profile","08-44090000465000004650"))
-    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-GGSN-MCC-MNC",MCC_MNC))
     CCR_avps.append(encodeAVP("3GPP-NSAPI","5"))
     CCR_avps.append(encodeAVP("Called-Station-Id",apn))
     CCR_avps.append(encodeAVP("3GPP-Selection-Mode","0"))
     CCR_avps.append(encodeAVP("3GPP-Charging-Characteristics","0100"))
-    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC","71610"))
+    CCR_avps.append(encodeAVP("3GPP-SGSN-MCC-MNC",MCC_MNC))
     CCR_avps.append("000000178000000e000028af0a000000")
     CCR_avps.append("0000001680000019000028af8217f601378d17f6010848b8fc000000")
     CCR_avps.append(encodeAVP("3GPP-RAT-Type","06"))
@@ -169,19 +164,17 @@ def MGyT2(session_id,o_host,state,msisdn,imsi,apn,usedquota):
 
 if __name__ == '__main__':
     LoadDictionary("dictDiameter.xml")
-    HOST="10.20.12.28"
+    HOST="10.20.12.206"
     PORT=3868
-    O_HOST = "testpgw01.gy.epc.mnc000.mcc716.3gppnetwork.org"
+    O_HOST = "testpgw01.gy.epc.mnc00.mcc716.3gppnetwork.org"
     SESSION_ID=create_Session_Id(O_HOST)
-    #IMSI="716001000000124"
     IMSI="716001000000141"
-    #MSISDN="51914389110"
     MSISDN="51987654330"
     STATE_ID=192837465
     APN="mvno.pe"
     ##deben ser iguales RG y RG_ITERATIONS!!
-    RG = [1, 25]  # Lista de Rating Groups
-    RG_ITERATIONS = {1: 2, 25: 1}  # Cantidad de iteraciones para cada RG
+    RG = [1, 30]  # Lista de Rating Groups
+    RG_ITERATIONS = {1: 1, 30: 1}  # Cantidad de iteraciones para cada RG
     USED_UNITS = {rg: 0 for rg in RG}  # Diccionario para manejar unidades utilizadas por RG
     CCTO_AVP = 0 #Unidades entregadas por el OCS
     MSG_SIZE=4096

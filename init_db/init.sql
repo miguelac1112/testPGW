@@ -52,8 +52,9 @@ CREATE TABLE IF NOT EXISTS package_purchase (
     validity_period INT,
     data_balance BIGINT,
     price INT,
+    type TEXT,
     qos_id INT,
-    priority INT
+    priority INT DEFAULT 1
 );
 
 -- Insertar datos en la tabla account
@@ -81,8 +82,8 @@ INSERT INTO subscriber_packages (msisdn, package_id) VALUES
 (51965432109, 103);
 
 -- Insertar datos en la tabla package_purchase
-INSERT INTO package_purchase (name, description, validity_period, data_balance, price, qos_id, priority)
+INSERT INTO package_purchase (name, description, validity_period, data_balance, price, type, qos_id)
 VALUES
-('Plan Básico', '1GB de datos', 30, 1073741824, 1000, 1, 1),
-('Plan Avanzado', '5GB de datos', 30, 5368709120, 1500, 1, 1),
-('Plan Ilimitado', 'Datos ilimitados', 30, 53687091200, 2000, 1, 1);
+('Plan Básico', '1GB de datos', 30, 1073741824, 1000, 'prepaid' , 1),
+('Plan Avanzado', '5GB de datos', 30, 5368709120, 1500,'prepaid', 1),
+('Plan Ilimitado', 'Datos ilimitados', 30, 53687091200, 2000,'prepaid', 1);
