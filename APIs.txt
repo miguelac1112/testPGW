@@ -8,6 +8,7 @@ POST: /create_subscriber
 		}
 
 GET: /get_subscriber_info?msisdn=X
+
 	    URL: http://IP:5000/get_subscriber_info?msisdn=X
 	
 POST: /create_package
@@ -27,22 +28,54 @@ POST: /create_package
 		
 PUT /update_package_balance
 
-	http://IP:5000/update_package_balance
-	
-	Request ejem:
-		{
-			"package_id": 104, 
-			"data_balance": 0
-		}
+		URL: http://IP:5000/update_package_balance
+		
+		Request ejem:
+			{
+				"package_id": 104, 
+				"data_balance": 0
+			}
 		
 PUT /update_islocked
 
-	http://IP:5000/update_islocked
-	
-	Request ejem:
+		URL: http://IP:5000/update_islocked
+		
+		Request ejem:
+			{
+				"msisdn": "51987654330", 
+				"islocked": 0
+			}
+		
+		
+Delete /delete_line
+
+		URL: http://IP:5000/delete_line
+		
+		Request ejem: 
 		{
-			"msisdn": "51987654330", 
-			"islocked": 0
+			"msisdn": "51987654330"
 		}
 		
+Delete /delete_assign_package
+
+		URL: http://IP:5000/delete_assign_package
 		
+		Request ejem:
+		{
+			"msisdn": "51987654330", 
+			"package_name": "Plan Avanzado"
+		}
+		
+GET   /list_packages
+
+		URL: http://IP:5000/list_packages
+		
+POST  /assign_package
+
+		URL: http://IP:5000/assign_package
+		
+		Request ejem: 
+		{
+			"msisdn": "51987654330", 
+			"package_name": "Plan Avanzado"
+		}
