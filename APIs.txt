@@ -1,0 +1,48 @@
+POST: /create_subscriber
+		URL: http://IP:5000/create_subscriber
+	
+		Request ejem:
+		{
+			"msisdn": "51987654330", 
+			"imsi": "716001000000141"
+		}
+
+GET: /get_subscriber_info?msisdn=X
+	    URL: http://IP:5000/get_subscriber_info?msisdn=X
+	
+POST: /create_package
+
+		URL: http://IP:5000/create_package
+		
+		Request ejem:
+		{
+		  "name": "Plan 4GB",
+		  "description": "4GB de datos",
+		  "validity_period": 30,
+		  "data_balance": 4294967296,
+		  "price": 1500,
+		  "type": "prepaid",
+		  "qos_id": 1
+		}
+		
+PUT /update_package_balance
+
+	http://IP:5000/update_package_balance
+	
+	Request ejem:
+		{
+			"package_id": 104, 
+			"data_balance": 0
+		}
+		
+PUT /update_islocked
+
+	http://IP:5000/update_islocked
+	
+	Request ejem:
+		{
+			"msisdn": "51987654330", 
+			"islocked": 0
+		}
+		
+		
