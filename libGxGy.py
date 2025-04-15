@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# definitions for Gx and Gy CCRs for Claro Peru and Claro Chile
+# definitions for Gx and Gy CCRs
 import datetime
 import time
 import sys
